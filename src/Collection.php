@@ -35,4 +35,41 @@ class Collection extends \Hyperf\Database\Model\Collection
         unset($data);
         return $tree;
     }
+
+    /**
+     * 系统菜单转前端路由树
+     * @return array
+     */
+    public function sysMenuToRouterTree(): array
+    {
+        $data = $this->toArray();
+        if (empty($data)) return [];
+
+        $routers = [];
+        foreach ($data as $menu) {
+            $routers[] = $this->setRouter($menu);
+        }
+        return $this->toTree($routers);
+    }
+
+    /**
+     * @param $menu
+     * @return array
+     */
+    public function setRouter(&$menu): array
+    {
+        return [
+            'id' => $menu['id'],
+            'parent_id' => $menu['parent_id'],
+            'name' => $menu['code'],
+            'component' => $menu['component'],
+            'path' => "/{$menu['route']}",
+            'redirect' => $menu['redirect'],
+            'meta' => [
+                'icon' => $menu['icon'],
+                'locale' => $menu['name'],
+                'hideInMenu' => !($menu['hide_menu'] == 1),
+            ]
+        ];
+    }
 }

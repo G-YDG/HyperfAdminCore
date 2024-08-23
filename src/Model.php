@@ -19,6 +19,16 @@ class Model extends BaseModel implements CacheableInterface
     use Cacheable;
 
     /**
+     * 状态：启用
+     */
+    public const ENABLE = 1;
+
+    /**
+     * 状态：禁用
+     */
+    public const DISABLE = 2;
+
+    /**
      * 默认每页记录数.
      */
     public const PAGE_SIZE = 15;

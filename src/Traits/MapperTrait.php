@@ -135,10 +135,10 @@ trait MapperTrait
     public function getPageList(?array $params, string $pageName = 'page'): array
     {
         $paginate = $this->listQuerySetting($params)->paginate(
-            $params['pageSize'] ?? $this->model::PAGE_SIZE,
+            intval($params['pageSize'] ?? $this->model::PAGE_SIZE),
             ['*'],
             $pageName,
-            $params[$pageName] ?? 1
+            intval($params[$pageName] ?? 1),
         );
         return $this->setPaginate($paginate, $params);
     }
