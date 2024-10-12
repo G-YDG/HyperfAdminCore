@@ -202,7 +202,7 @@ trait MapperTrait
     /**
      * 获取单个值
      */
-    public function value(array $condition, string $columns = 'id'): ?Model
+    public function value(array $condition, string $columns = 'id'): mixed
     {
         return ($model = $this->model::where($condition)->value($columns)) ? $model : null;
     }
@@ -281,7 +281,7 @@ trait MapperTrait
     /**
      * 按条件读取一行数据.
      */
-    public function first(array $condition, array $column = ['*']): ?Model
+    public function first(array $condition, array $column = ['*'])
     {
         return ($model = $this->model::where($condition)->first($column)) ? $model : null;
     }
