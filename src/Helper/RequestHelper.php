@@ -1,13 +1,17 @@
 <?php
 
+declare(strict_types=1);
+/**
+ * This file is part of HyperfAdminCore.
+ *
+ *  * @link     https://github.com/G-YDG/HyperfAdminCore
+ *  * @license  https://github.com/G-YDG/HyperfAdminCore/blob/master/LICENSE
+ */
+
 namespace HyperfAdminCore\Helper;
 
 class RequestHelper
 {
-    /**
-     * @param $agent
-     * @return string
-     */
     public static function os($agent): string
     {
         if (stripos($agent, 'win') !== false && preg_match('/nt 6.1/i', $agent)) {
@@ -34,10 +38,6 @@ class RequestHelper
         return 'Unknown';
     }
 
-    /**
-     * @param $agent
-     * @return string
-     */
     public static function browser($agent): string
     {
         if (stripos($agent, 'MSIE') !== false) {

@@ -37,13 +37,14 @@ class Collection extends \Hyperf\Database\Model\Collection
     }
 
     /**
-     * 系统菜单转前端路由树
-     * @return array
+     * 系统菜单转前端路由树.
      */
     public function sysMenuToRouterTree(): array
     {
         $data = $this->toArray();
-        if (empty($data)) return [];
+        if (empty($data)) {
+            return [];
+        }
 
         $routers = [];
         foreach ($data as $menu) {
@@ -52,10 +53,6 @@ class Collection extends \Hyperf\Database\Model\Collection
         return $this->toTree($routers);
     }
 
-    /**
-     * @param $menu
-     * @return array
-     */
     public function setRouter(&$menu): array
     {
         return [
@@ -68,8 +65,8 @@ class Collection extends \Hyperf\Database\Model\Collection
             'meta' => [
                 'icon' => $menu['icon'],
                 'locale' => $menu['name'],
-                'hideInMenu' => !($menu['hide_menu'] == 1),
-            ]
+                'hideInMenu' => ! ($menu['hide_menu'] == 1),
+            ],
         ];
     }
 }

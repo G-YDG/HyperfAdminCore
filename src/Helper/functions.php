@@ -1,19 +1,26 @@
 <?php
 
-
+declare(strict_types=1);
+/**
+ * This file is part of HyperfAdminCore.
+ *
+ *  * @link     https://github.com/G-YDG/HyperfAdminCore
+ *  * @license  https://github.com/G-YDG/HyperfAdminCore/blob/master/LICENSE
+ */
 use Hyperf\AsyncQueue\Driver\DriverFactory;
 use Hyperf\AsyncQueue\Driver\DriverInterface;
 use Hyperf\Context\ApplicationContext;
 use Hyperf\Context\Context;
 use Hyperf\Contract\StdoutLoggerInterface;
 use Hyperf\Logger\LoggerFactory;
+use Hyperf\Redis\Redis;
 use Psr\Container\ContainerExceptionInterface;
 use Psr\Container\ContainerInterface;
 use Psr\Container\NotFoundExceptionInterface;
 use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Log\LoggerInterface;
 
-if (!function_exists('container')) {
+if (! function_exists('container')) {
     /**
      * 获取容器实例.
      */
@@ -23,7 +30,7 @@ if (!function_exists('container')) {
     }
 }
 
-if (!function_exists('redis')) {
+if (! function_exists('redis')) {
     /**
      * 获取Redis实例.
      * @throws ContainerExceptionInterface
@@ -35,7 +42,7 @@ if (!function_exists('redis')) {
     }
 }
 
-if (!function_exists('console')) {
+if (! function_exists('console')) {
     /**
      * 获取控制台输出实例.
      * @throws ContainerExceptionInterface
@@ -47,7 +54,7 @@ if (!function_exists('console')) {
     }
 }
 
-if (!function_exists('logger')) {
+if (! function_exists('logger')) {
     /**
      * 获取日志实例.
      * @throws ContainerExceptionInterface
@@ -59,7 +66,7 @@ if (!function_exists('logger')) {
     }
 }
 
-if (!function_exists('env')) {
+if (! function_exists('env')) {
     /**
      * 获取环境变量信息.
      */
@@ -69,14 +76,14 @@ if (!function_exists('env')) {
     }
 }
 
-if (!function_exists('make')) {
+if (! function_exists('make')) {
     function make(string $name, array $parameters = [])
     {
         return \Hyperf\Support\make($name, $parameters);
     }
 }
 
-if (!function_exists('config')) {
+if (! function_exists('config')) {
     /**
      * 获取配置信息.
      */
@@ -86,7 +93,7 @@ if (!function_exists('config')) {
     }
 }
 
-if (!function_exists('event')) {
+if (! function_exists('event')) {
     /**
      * 事件调度快捷方法.
      * @throws ContainerExceptionInterface
@@ -98,7 +105,7 @@ if (!function_exists('event')) {
     }
 }
 
-if (!function_exists('driver')) {
+if (! function_exists('driver')) {
     /**
      * 队列驱动调度快捷方法.
      * @throws ContainerExceptionInterface
@@ -110,17 +117,17 @@ if (!function_exists('driver')) {
     }
 }
 
-if (!function_exists('context_set')) {
+if (! function_exists('context_set')) {
     /**
      * 设置上下文数据.
      */
     function context_set(string $key, mixed $data): bool
     {
-        return (bool)Context::set($key, $data);
+        return (bool) Context::set($key, $data);
     }
 }
 
-if (!function_exists('context_get')) {
+if (! function_exists('context_get')) {
     /**
      * 获取上下文数据.
      */
@@ -130,7 +137,7 @@ if (!function_exists('context_get')) {
     }
 }
 
-if (!function_exists('blank')) {
+if (! function_exists('blank')) {
     /**
      * 判断给定的值是否为空.
      */
@@ -156,17 +163,17 @@ if (!function_exists('blank')) {
     }
 }
 
-if (!function_exists('filled')) {
+if (! function_exists('filled')) {
     /**
      * 判断给定的值是否不为空.
      */
     function filled(mixed $value): bool
     {
-        return !blank($value);
+        return ! blank($value);
     }
 }
 
-if (!function_exists('format_size')) {
+if (! function_exists('format_size')) {
     /**
      * 格式化大小.
      */
@@ -182,7 +189,7 @@ if (!function_exists('format_size')) {
     }
 }
 
-if (!function_exists('make_dir')) {
+if (! function_exists('make_dir')) {
     /**
      * 判断文件夹是否存在，不存在则创建.
      */
@@ -192,7 +199,7 @@ if (!function_exists('make_dir')) {
             return true;
         }
 
-        if (!mkdir(dirname($dir), $mode)) {
+        if (! mkdir(dirname($dir), $mode)) {
             return false;
         }
 

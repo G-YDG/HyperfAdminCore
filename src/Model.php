@@ -19,12 +19,12 @@ class Model extends BaseModel implements CacheableInterface
     use Cacheable;
 
     /**
-     * 状态：启用
+     * 状态：启用.
      */
     public const ENABLE = 1;
 
     /**
-     * 状态：禁用
+     * 状态：禁用.
      */
     public const DISABLE = 2;
 
